@@ -1,0 +1,59 @@
+# Logs
+# dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+logs
+# dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+*.log
+# dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+npm-debug.log*
+# dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+yarn-debug.log*
+# dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+yarn-error.log*
+# dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+pnpm-debug.log*
+# dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+lerna-debug.log*
+# dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+# dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+# Ignore package-lock.json
+# dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+package-lock.json
+# dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+/node_modules
+# dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+.env
+# dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+.netrc
+# dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+node_modules
+# dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+dist
+# dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+dist-ssr
+# dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+*.local
+# dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+
+# Editor directories and files
+# dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+.vscode/*
+# dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+!.vscode/extensions.json
+# dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+.idea
+# dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+.DS_Store
+# dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+*.suo
+# dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+*.ntvs*
+# dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+*.njsproj
+# dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+*.sln
+# dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+*.sw?
+# dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+# dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+.vercel
+# dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735

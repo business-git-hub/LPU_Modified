@@ -1,0 +1,40 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "client": "npm run dev --prefix ../client",
+    "app": "concurrently \"npm start\" \"npm run client\"",
+    "build": "npm install --legacy-peer-deps --prefix ../server && npm install --legacy-peer-deps --prefix ../client && npm run build --prefix ../client && npm run start --prefix ../server"
+  },
+  "keywords": [],
+  "author": "dev by sanket Arjun Pujari - 7378768735",
+  "license": "ISC",
+  "description": "In addition to our academic programs, we offer a variety of extracurricular activities and resources to enhance the student experience. From clubs and organizations to research opportunities and internships, our students have the chance to engage in meaningful experiences outside of the classroom.",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^2.5.1",
+    "concurrently": "^9.1.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.8.1",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "node-cron": "^3.0.3",
+    "nodemon": "^3.1.7",
+    "path": "^0.12.7",
+    "server": "file:",
+    "sharp": "^0.33.5",
+    "topuniversityindia.com-server": "file:",
+    "validator": "^13.12.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  }
+}
