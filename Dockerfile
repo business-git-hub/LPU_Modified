@@ -27,14 +27,13 @@ RUN apk add --no-cache nginx
 
 # Copy the built files from the builder stage
 COPY --from=builder /app/server /app/server
-COPY --from=builder /app/client/build /usr/share/nginx/html  # Ensure frontend is served
+COPY --from=builder /app/client/dist /usr/share/nginx/html  
 
 # Copy Nginx config
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # Expose server and frontend ports
 EXPOSE 8000
-EXPOSE 80
 
 # Copy and set permissions for the entrypoint script
 COPY entrypoint.sh /entrypoint.sh
