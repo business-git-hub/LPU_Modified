@@ -46,7 +46,7 @@ export default function Footer() {
                 <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">
                   <FaTwitter className="h-6 w-6 text-gray-400 hover:text-white transition duration-300" />
                 </a>
-                <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.instagram.com/topuniversityindia?igsh=MWphazNlNWVybHE3Ng%3D%3D" target="_blank" rel="noopener noreferrer">
                   <FaInstagram className="h-6 w-6 text-gray-400 hover:text-white transition duration-300" />
                 </a>
               </div>
@@ -82,7 +82,7 @@ export default function Footer() {
         {/* Developer Credit */}
         {/* //dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735 */}
         <div className="mt-2 text-center text-xs text-gray-400">
-          Developed by <a href="https://trideocoders.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-white transition duration-300">Trideocoders</a>
+          Developed by <a href="https://trideocoders.ai" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-white transition duration-300">Trideocoders</a>
         </div>
       </div>
     </footer>

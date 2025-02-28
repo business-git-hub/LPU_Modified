@@ -55,28 +55,38 @@ const viewRoutes = require("./routers/view.routes.js");
 // ✅ Configure CORS middleware to allow access from all 
 //dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
 
-const isDevelopment = process.env.NODE_ENV === "production";
+const isDevelopment = process.env.NODE_ENV !== "production";
 
 // ✅ Define allowed origins
 //dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
 const allowedOrigins = isDevelopment
-  ? [process.env.ACCESS_CONTROL_ALLOW_ORIGIN || "http://localhost:8080"]
-  : ["http://localhost:5173/", "http://localhost:3000"];
-
+  ? ["http://localhost:5173", "http://localhost:3000"]
+  : process.env.ACCESS_CONTROL_ALLOW_ORIGIN
+    ? process.env.ACCESS_CONTROL_ALLOW_ORIGIN.split(",")
+    : [];
+// ✅ Proper CORS options
 // ✅Configure CORS 
 //dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+
 const corsOptions = {
-  origin: allowedOrigins,
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
   exposedHeaders: ["Cookie", "Authorization"],
   credentials: true, // ✅ Allows cookies to be sent
 };
+
 //dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
 
 // ✅ Apply CORS middleware
 //dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
-app.use("*", cors(corsOptions));
+app.use(cors(corsOptions));
 
 // ✅ Middleware for parsing URL-encoded and JSON request bodies
 //dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
@@ -118,31 +128,25 @@ app.use("/api/universities", universityRoutes);
 
 
 // ✅ Serve frontend in production mode
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../../client/dist"), {
-    setHeaders: (res, filePath) => {
-      if (filePath.endsWith(".js") || filePath.endsWith(".mjs")) {
-        res.setHeader("Content-Type", "application/javascript");
-      }
-    }
-  }));
-  app.get("*", (req, res) => {
-    // Serve frontend in development mode
-    //dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
-    res.sendFile(path.join(__dirname, "../../client/dist/index.html"));
-  });
-  app.get("*", (req, res) => {
-    //dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
-    res.sendFile(path.join(__dirname, "../../client/dist/index.html"));
-  });
-} else {
+if (isDevelopment) {
   console.log("Running in development mode...");
   //dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
-  app.use(express.static(path.join(__dirname, "../../client/dist")));
+} else {
+  console.log("Serving frontend in production mode...");
   //dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+  app.use(
+    express.static(path.resolve(__dirname, "..", "..", "client", "dist"), {
+      setHeaders: (res, filePath) => {
+        if (filePath.endsWith(".js") || filePath.endsWith(".mjs")) {
+          res.setHeader("Content-Type", "application/javascript");
+        }
+      },
+    })
+  );
+  //dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
+  // ✅ Serve index.html for all unknown routes
   app.get("*", (req, res) => {
-    //dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
-    res.sendFile(path.join(__dirname, "../../client/dist/index.html"));
+    res.sendFile(path.resolve(__dirname, "..", "..", "client", "dist", "index.html"));
   });
 }
 

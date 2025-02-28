@@ -139,7 +139,10 @@ async function login(req, res) {
         // Set the token as a cookie
         //dev by sanket Arjun pujari - sanketpujari33@gmiail.com - 7378768735
         res.cookie(process.env.SESSION_TOKEN, token, {
-            expire: oneDayInSeconds + Date.now(),
+            httpOnly: true,  // Prevents client-side access
+            secure: process.env.NODE_ENV === 'production', // Use HTTPS in production
+            sameSite: 'Strict', // Prevent CSRF attacks
+            maxAge: oneDayInSeconds * 1000, // Expiry time in milliseconds
         });
 
         // Respond with user information, roles, and token

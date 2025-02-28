@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo_db
+    restart: always
+    ports:
+      - "27018:27017"  # Change default MongoDB port to 27018
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: new_admin
+      MONGO_INITDB_ROOT_PASSWORD: new_password
+    volumes:
+      - new-mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.runCommand({ ping: 1 })"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  new-mongo-data:

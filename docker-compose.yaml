@@ -1,53 +1,25 @@
 version: '3.8'
 
 services:
-  mongo:
-    image: mongo:latest
-    container_name: mongo_db
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: topuniversityindia_app
     restart: always
     ports:
-      - "27017:27017"
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: password
-    volumes:
-      - mongo-data:/data/db
-
-  server:
-    build: ./server
-    container_name: mern_backend
-    restart: always
-    ports:
-      - "5000:5000"
+      - "8000:8000"
     depends_on:
-      - mongo
+      mongo:
+        condition: service_healthy
     env_file:
+      - .env
       - ./server/.env
+      - ./client/.env
     volumes:
-      - ./server:/app
-      - /app/node_modules
-
-  client:
-    build: ./client
-    container_name: frontend_client
-    restart: always
-    depends_on:
-      - server
-    volumes:
-      - ./client:/app
-      - /app/node_modules
-
-  nginx:
-    image: nginx:alpine
-    container_name: nginx_proxy
-    restart: always
-    ports:
-      - "80:80"
-    depends_on:
-      - client
-      - server
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-
-volumes:
-  mongo-data:
+      - ./server:/app/server
+      - ./client:/app/client
+      - /app/server/node_modules
+      - /app/client/node_modules
+    environment:
+      NODE_ENV: production

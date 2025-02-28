@@ -8,7 +8,7 @@
     "dev": "nodemon server.js",
     "client": "npm run dev --prefix ../client",
     "app": "concurrently \"npm start\" \"npm run client\"",
-    "build": "npm install --legacy-peer-deps --prefix ../server && npm install --legacy-peer-deps --prefix ../client && npm run build --prefix ../client && npm run start --prefix ../server"
+    "build": "npm run build --prefix ../client && npm run start --prefix ../server"
   },
   "keywords": [],
   "author": "dev by sanket Arjun Pujari - 7378768735",
@@ -20,7 +20,7 @@
     "concurrently": "^9.1.2",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.4.7",
     "express": "^4.21.1",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.8.1",
