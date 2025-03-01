@@ -9,9 +9,6 @@ services:
     restart: always
     ports:
       - "8000:8000"
-    depends_on:
-      mongo:
-        condition: service_healthy
     env_file:
       - .env
       - ./server/.env
@@ -21,5 +18,33 @@ services:
       - ./client:/app/client
       - /app/server/node_modules
       - /app/client/node_modules
+    networks:
+      - mongo_network  # Use the same network
     environment:
       NODE_ENV: production
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo_db
+    restart: always
+    ports:
+      - "27018:27018"  # Change default MongoDB port to 27018
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: new_admin
+      MONGO_INITDB_ROOT_PASSWORD: new_password
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - mongo_network  # Use a shared network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.runCommand({ ping: 1 })"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+
+volumes:
+  mongo-data:
+
+networks:
+  mongo_network:
+    external: true  # Ensure it connects to the existing network
