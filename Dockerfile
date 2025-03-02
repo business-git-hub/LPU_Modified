@@ -4,8 +4,8 @@ FROM node:18-alpine AS builder
 WORKDIR /app
 
 # Copy package files separately for caching
-COPY ./server/package.json ./server/
-COPY ./client/package.json ./client/
+COPY ./server/package.json ./server/package-lock.json ./server/
+COPY ./client/package.json ./client/package-lock.json ./client/
 
 # Install dependencies for server and client
 RUN npm install --legacy-peer-deps --prefix ./server
@@ -22,22 +22,21 @@ FROM node:18-alpine AS runtime
 
 WORKDIR /app
 
-# Install Nginx and other dependencies
+
+# Install Nginx
 RUN apk add --no-cache nginx
 
 # Copy the built files from the builder stage
 COPY --from=builder /app/server /app/server
-COPY --from=builder /app/client/dist /usr/share/nginx/html  
+COPY --from=builder /app/client /app/client
 
-# Copy Nginx config
-COPY nginx.conf /etc/nginx/nginx.conf
 
-# Expose server and frontend ports
-EXPOSE 8000
+# Expose port 8081 server
+EXPOSE 8081
 
-# Copy and set permissions for the entrypoint script
+# Copy the entrypoint script and ensure it’s executable
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-# Start the entrypoint script
+# Set the entrypoint so the script runs when the container starts
 ENTRYPOINT ["/entrypoint.sh"]
