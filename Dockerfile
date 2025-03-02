@@ -22,17 +22,18 @@ FROM node:18-alpine AS runtime
 
 WORKDIR /app
 
-
 # Install Nginx
 RUN apk add --no-cache nginx
 
 # Copy the built files from the builder stage
 COPY --from=builder /app/server /app/server
-COPY --from=builder /app/client /app/client
+COPY --from=builder /app/client/build /usr/share/nginx/html
 
+# Copy Nginx configuration (create and customize nginx.conf if needed)
+COPY nginx.conf /etc/nginx/nginx.conf
 
-# Expose port 8081 server
-EXPOSE 8081
+# Expose server and frontend ports
+EXPOSE 80 8081
 
 # Copy the entrypoint script and ensure it’s executable
 COPY entrypoint.sh /entrypoint.sh
