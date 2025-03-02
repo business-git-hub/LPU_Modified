@@ -33,7 +33,7 @@ COPY --from=builder /app/client/build /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # Expose server and frontend ports
-EXPOSE 80 8081
+EXPOSE 80 8000
 
 # Copy the entrypoint script and ensure it’s executable
 COPY entrypoint.sh /entrypoint.sh
